@@ -1,0 +1,70 @@
+https://zh.javascript.info/class
+class” 语法
+基本语法是：
+
+class MyClass {
+  // class 方法
+  constructor() { ... }
+  method1() { ... }
+  method2() { ... }
+  method3() { ... }
+  ...
+}
+然后使用 new MyClass() 来创建具有上述列出的所有方法的新对象。
+
+new 会自动调用 constructor() 方法，因此我们可以在 constructor() 中初始化对象。
+
+例如：
+
+class User {
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  sayHi() {
+    alert(this.name);
+  }
+
+}
+
+// 用法：
+let user = new User("John");
+user.sayHi();
+当 new User("John") 被调用：
+
+一个新对象被创建。
+constructor 使用给定的参数运行，并将其赋值给 this.name。
+……然后我们就可以调用对象方法了，例如 user.sayHi。
+
+
+Getters/setters
+就像对象字面量，类可能包括 getters/setters，计算属性（computed properties）等。
+
+这是一个使用 get/set 实现 user.name 的示例：
+
+class User {
+
+  constructor(name) {
+    // 调用 setter
+    this.name = name;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  set name(value) {
+    if (value.length < 4) {
+      alert("Name is too short.");
+      return;
+    }
+    this._name = value;
+  }
+
+}
+
+let user = new User("John");
+alert(user.name); // John
+
+user = new User(""); // Name is too short.

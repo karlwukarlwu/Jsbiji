@@ -1,0 +1,28 @@
+当使用 `call` 和 `apply` 方法时，它们允许你：
+
+1. **设置函数的上下文（this）**：你可以明确指定函数内部的 `this` 值，通常将其设置为一个对象，以便在函数内部访问该对象的属性和方法。
+
+```javascript
+function sayHello() {
+    console.log(`Hello, ${this.name}!`);
+}
+
+const person = {
+    name: "John"
+};
+
+sayHello.call(person); // 使用 call 方法设置上下文为 person 对象
+```
+
+2. **传递参数给函数**：你可以将参数作为一个数组传递给函数，或者使用 `call` 方法逐个传递参数。
+
+```javascript
+function add(a, b) {
+    return a + b;
+}
+
+console.log(add.apply(null, [2, 3])); // 使用 apply 方法传递参数数组
+console.log(add.call(null, 2, 3));    // 使用 call 方法逐个传递参数
+```
+
+这些方法对于在不同上下文中调用函数，或者需要动态传递参数的情况非常有用。`call` 和 `apply` 之间的主要区别仅在于参数的传递方式，`call` 使用逐个传递参数，而 `apply` 使用参数数组。

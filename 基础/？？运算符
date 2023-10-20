@@ -1,0 +1,19 @@
+出于安全原因，JavaScript 禁止将 ?? 运算符与 && 和 || 运算符一起使用，
+除非使用括号明确指定了优先级。
+
+a ?? b 的结果是：
+
+如果 a 是已定义的，则结果为 a，
+如果 a 不是已定义的，则结果为 b。
+
+代码实现
+例如，在这里，如果 user 的值不为 null/undefined 则显示 user，否则显示 匿名：
+
+let user;
+
+alert(user ?? "匿名"); // 匿名（user 未定义）
+在下面这个例子中，我们将一个名字赋值给了 user：
+
+let user = "John";
+
+alert(user ?? "匿名"); // John（user 已定义）

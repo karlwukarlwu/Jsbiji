@@ -1,0 +1,56 @@
+我们可以创建一个新对象，通过遍历已有对象的属性，并在原始类型值的层面复制它们，以实现对已有对象结构的复制。
+
+就像这样：
+
+let user = {
+  name: "John",
+  age: 30
+};
+
+let clone = {}; // 新的空对象
+
+// 将 user 中所有的属性拷贝到其中
+for (let key in user) {
+  clone[key] = user[key];
+}
+
+// 现在 clone 是带有相同内容的完全独立的对象
+clone.name = "Pete"; // 改变了其中的数据
+
+alert( user.name ); // 原来的对象中的 name 属性依然是 John
+我们也可以使用 Object.assign 方法来达成同样的效果。
+
+语法是：
+
+Object.assign(dest, [src1, src2, src3...])
+第一个参数 dest 是指目标对象。
+更后面的参数 src1, ..., srcN（可按需传递多个参数）是源对象。
+该方法将所有源对象的属性拷贝到目标对象 dest 中。换句话说，从第二个开始的所有参数的属性都被拷贝到第一个参数的对象中。
+调用结果返回 dest。
+例如，我们可以用它来合并多个对象：
+
+let user = { name: "John" };
+
+let permissions1 = { canView: true };
+let permissions2 = { canEdit: true };
+
+// 将 permissions1 和 permissions2 中的所有属性都拷贝到 user 中
+Object.assign(user, permissions1, permissions2);
+
+// 现在 user = { name: "John", canView: true, canEdit: true }
+如果被拷贝的属性的属性名已经存在，那么它会被覆盖：
+
+let user = { name: "John" };
+
+Object.assign(user, { name: "Pete" });
+
+alert(user.name); // 现在 user = { name: "Pete" }
+我们也可以用 Object.assign 代替 for..in 循环来进行简单克隆：
+
+let user = {
+  name: "John",
+  age: 30
+};
+
+let clone = Object.assign({}, user);
+它将 user 中的所有属性拷贝到了一个空对象中，并返回这个新的对象。

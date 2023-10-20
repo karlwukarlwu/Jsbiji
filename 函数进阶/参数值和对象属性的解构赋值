@@ -1,0 +1,48 @@
+spread语法
+
+它看起来和 rest 参数很像，也使用 ...，但是二者的用途完全相反。
+
+当在函数调用中使用 ...arr 时，它会把可迭代对象 arr “展开”到参数列表中。
+
+以 Math.max 为例：
+
+let arr = [3, 5, 1];
+
+alert( Math.max(...arr) ); // 5（spread 语法把数组转换为参数列表）
+
+我们甚至还可以将 spread 语法与常规值结合使用：
+
+let arr1 = [1, -2, 3, 4];
+let arr2 = [8, 3, -8, 1];
+
+alert( Math.max(1, ...arr1, 2, ...arr2, 25) ); // 25
+
+并且，我们还可以使用 spread 语法来合并数组：
+
+let arr = [3, 5, 1];
+let arr2 = [8, 9, 15];
+
+let merged = [0, ...arr, 2, ...arr2];
+
+alert(merged); // 0,3,5,1,2,8,9,15（0，然后是 arr，然后是 2，然后是 arr2）
+在上面的示例中，我们使用数组展示了 spread 语法，其实我们可以用 spread 语法这样操作任何可迭代对象。
+
+spread语法还可以进行浅拷贝
+以通过相同的方式来复制一个对象：
+
+let obj = { a: 1, b: 2, c: 3 };
+
+let objCopy = { ...obj }; // 将对象 spread 到参数列表中
+                          // 然后将结果返回到一个新对象
+
+// 两个对象中的内容相同吗？
+alert(JSON.stringify(obj) === JSON.stringify(objCopy)); // true
+
+// 两个对象相等吗？
+alert(obj === objCopy); // false (not same reference)
+
+// 修改我们初始的对象不会修改副本：
+obj.d = 4;
+alert(JSON.stringify(obj)); // {"a":1,"b":2,"c":3,"d":4}
+alert(JSON.stringify(objCopy)); // {"a":1,"b":2,"c":3}
+这种方式比使用 let arrCopy = Object.assign([], arr) 复制数组，或使用 let objCopy = Object.assign({}, obj) 复制对象来说更为简便。因此，只要情况允许，我们倾向于使用它。

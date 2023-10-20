@@ -1,0 +1,13 @@
+箭头函数没有 "arguments"
+如果我们在箭头函数中访问 arguments，访问到的 arguments 并不属于箭头函数，而是属于箭头函数外部的“普通”函数。
+
+举个例子：
+
+function f() {
+  let showArg = () => alert(arguments[0]);
+  showArg();
+}
+
+f(1); // 1
+我们已经知道，箭头函数没有自身的 this。现在我们知道了它们也没有特殊的 arguments 对象。
+https://zh.javascript.info/rest-parameters-spread

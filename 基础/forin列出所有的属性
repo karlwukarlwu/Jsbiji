@@ -1,0 +1,17 @@
+例如，让我们列出 user 所有的属性：
+
+let user = {
+  name: "John",
+  age: 30,
+  isAdmin: true
+};
+
+for (let key in user) {
+  // keys
+  alert( key );  // name, age, isAdmin
+  // 属性键的值
+  alert( user[key] ); // John, 30, true
+}
+注意，所有的 “for” 结构体都允许我们在循环中定义变量，像这里的 let key。
+
+同样，我们可以用其他属性名来替代 key。例如 "for(let prop in obj)" 也很常用。

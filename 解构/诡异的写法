@@ -1,0 +1,58 @@
+
+let options = {
+  title: "My menu",
+  items: ["Item1", "Item2"]
+};
+
+function showMenu({
+  title = "Untitled",
+  width: w = 100,  // width goes to w
+  height: h = 200, // height goes to h
+  items: [item1, item2] // items first element goes to item1, second to item2
+}) {
+  alert( `${title} ${w} ${h}` ); // My Menu 100 200
+  alert( item1 ); // Item1
+  alert( item2 ); // Item2
+}
+
+showMenu(options);
+
+请注意，这种解构假定了 showMenu() 函数确实存在参数。如果我们想让所有的参数都使用默认值，那我们应该传递一个空对象：
+
+showMenu({}); // 不错，所有值都取默认值
+
+showMenu(); // 这样会导致错误
+
+
+我们可以通过指定空对象 {} 为整个参数对象的默认值来解决这个问题：
+
+
+function showMenu({ title = "Menu", width = 100, height = 200 } = {}) {
+  alert( `${title} ${width} ${height}` );
+}
+
+showMenu(); // Menu 100 200
+
+这段代码使用了对象解构和默认参数值，下面是详细的步骤解释：
+
+showMenu 函数定义：
+
+showMenu 是一个接受一个参数的函数，参数使用对象解构的方式来定义。
+在对象解构的括号内，指定了三个属性：title、width、和 height，每个属性都有默认值。如果这些属性在传入的参数对象中不存在或者为 undefined，则会使用默认值。
+默认参数值：
+
+默认参数值在等号右边的花括号内定义：{ title = "Menu", width = 100, height = 200 }。
+这里定义了三个属性的默认值，如果函数调用时未提供对应的属性值，这些默认值将会被使用。
+函数调用：
+
+showMenu(); 调用了 showMenu 函数，没有传递任何参数。
+由于没有传递参数，函数会使用默认参数值。这里没有传递参数对象，所以默认参数值就是函数定义中的 {}。
+对象解构与默认值的工作：
+
+函数内部的对象解构会尝试从传入的参数对象中提取 title、width 和 height 属性，但由于没有传递参数对象，所以实际上是在一个空对象 {} 上进行解构。
+因为没有传递参数对象，所以所有属性都会使用默认值。即 title 使用 "Menu"，width 使用 100，height 使用 200。
+弹出对话框：
+
+最后，通过 alert 函数弹出一个对话框，显示 title、width 和 height 的值。
+由于没有传递参数，显示的值是默认参数值的值，即 "Menu 100 200"。
+总结：这段代码演示了如何在函数参数中使用对象解构和默认参数值，以及如何处理没有传递参数的情况。当没有传递参数时，函数会使用默认参数值，如果传递了参数对象，则会覆盖默认值。这种方式可以使函数更灵活，同时提供了默认行为。

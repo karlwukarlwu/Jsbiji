@@ -1,0 +1,87 @@
+解决方案 1：包装器
+最简单的解决方案是使用一个包装函数：
+
+let user = {
+  firstName: "John",
+  sayHi() {
+    alert(`Hello, ${this.firstName}!`);
+  }
+};
+
+setTimeout(function() {
+  user.sayHi(); // Hello, John!
+}, 1000);
+现在它可以正常工作了，因为它从外部词法环境中获取到了 user，就可以正常地调用方法了。
+
+相同的功能，但是更简短：
+
+setTimeout(() => user.sayHi(), 1000); // Hello, John!
+
+
+解决方案 2：bind
+函数提供了一个内建方法 bind，它可以绑定 this。
+
+基本的语法是：
+
+// 稍后将会有更复杂的语法
+let boundFunc = func.bind(context);
+func.bind(context) 的结果是一个特殊的类似于函数的“外来对象（exotic object）”，它可以像函数一样被调用，并且透明地（transparently）将调用传递给 func 并设定 this=context。
+
+换句话说，boundFunc 调用就像绑定了 this 的 func。
+
+举个例子，这里的 funcUser 将调用传递给了 func 同时 this=user：
+
+let user = {
+  firstName: "John"
+};
+
+function func() {
+  alert(this.firstName);
+}
+
+let funcUser = func.bind(user);
+funcUser(); // John
+这里的 func.bind(user) 作为 func 的“绑定的（bound）变体”，绑定了 this=user。
+
+所有的参数（arguments）都被“原样”传递给了初始的 func，例如：
+let user = {
+  firstName: "John"
+};
+
+function func(phrase) {
+  alert(phrase + ', ' + this.firstName);
+}
+
+// 将 this 绑定到 user
+let funcUser = func.bind(user);
+
+funcUser("Hello"); // He|llo, John（参数 "Hello" 被传递，并且 this=user）
+
+绑定部分参数的写法
+部分（应用）函数（Partial functions）
+到现在为止，我们只在谈论绑定 this。让我们再深入一步。
+
+我们不仅可以绑定 this，还可以绑定参数（arguments）。虽然很少这么做，但有时它可以派上用场。
+
+bind 的完整语法如下：
+
+let bound = func.bind(context, [arg1], [arg2], ...);
+它允许将上下文绑定为 this，以及绑定函数的部分参数。
+
+例如，我们有一个乘法函数 mul(a, b)：
+
+function mul(a, b) {
+  return a * b;
+}
+让我们使用 bind 在该函数基础上创建一个 double 函数：
+
+function mul(a, b) {
+  return a * b;
+}
+
+let double = mul.bind(null, 2);
+
+alert( double(3) ); // = mul(2, 3) = 6
+alert( double(4) ); // = mul(2, 4) = 8
+alert( double(5) ); // = mul(2, 5) = 10
+对 mul.bind(null, 2) 的调用创建了一个新函数 double，它将调用传递到 mul，将 null 绑定为上下文，并将 2 绑定为第一个参数。并且，参数（arguments）均被“原样”传递。

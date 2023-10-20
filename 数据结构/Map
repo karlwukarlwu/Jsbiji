@@ -1,0 +1,38 @@
+Map
+Map 是一个带键的数据项的集合，就像一个 Object 一样。 但是它们最大的差别是 Map 允许任何类型的键（key）。
+
+如我们所见，与对象不同，键不会被转换成字符串。键可以是任何类型。
+
+它的方法和属性如下：
+
+new Map() —— 创建 map。
+或者这样创建
+let recipeMap = new Map([
+  ['cucumber', 500],
+  ['tomatoes', 350],
+  ['onion',    50]
+]);
+
+
+map.set(key, value) —— 根据键存储值。
+map.get(key) —— 根据键来返回值，如果 map 中不存在对应的 key，则返回 undefined。
+map.has(key) —— 如果 key 存在则返回 true，否则返回 false。
+map.delete(key) —— 删除指定键的值。
+map.clear() —— 清空 map。
+map.size —— 返回当前元素个数。
+
+链式调用
+链式调用
+每一次 map.set 调用都会返回 map 本身，所以我们可以进行“链式”调用：
+
+map.set('1', 'str1')
+  .set(1, 'num1')
+  .set(true, 'bool1'
+
+map的forEach方法
+Map 有内建的 forEach 方法，与 Array 类似：
+
+// 对每个键值对 (key, value) 运行 forEach 函数
+recipeMap.forEach( (value, key, map) => {
+  alert(`${key}: ${value}`); // cucumber: 500 etc
+});

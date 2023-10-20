@@ -1,0 +1,15 @@
+
+prompt
+prompt 函数接收两个参数：
+
+result = prompt(title, [default]);
+浏览器会显示一个带有文本消息的模态窗口，还有 input 框和确定/取消按钮。
+
+title
+显示给用户的文本
+default
+可选的第二个参数，指定 input 框的初始值。
+
+let age = prompt('How old are you?', 100);
+
+alert(`You are ${age} years old!`); // You are 100 years old!

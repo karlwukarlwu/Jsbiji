@@ -1,0 +1,39 @@
+这个是函数属性
+function sayHi() {
+  alert("Hi");
+
+  // 计算调用次数
+  sayHi.counter++;
+}
+sayHi.counter = 0; // 初始值
+
+sayHi(); // Hi
+sayHi(); // Hi
+
+alert( `Called ${sayHi.counter} times` ); // Called 2 times
+
+
+函数属性有时会用来替代闭包。例如，我们可以使用函数属性将 变量作用域，闭包 章节中 counter 函数的例子进行重写：
+
+属性不是变量
+被赋值给函数的属性，比如 sayHi.counter = 0，不会 在函数内定义一个局部变量 counter。换句话说，属性 counter 和变量 let counter 是毫不相关的两个东西。
+
+我们可以把函数当作对象，在它里面存储属性，但是这对它的执行没有任何影响。变量不是函数属性，反之亦然。它们之间是平行的。
+
+function makeCounter() {
+  // 不需要这个了
+  // let count = 0
+
+  function counter() {
+    return counter.count++;
+  };
+
+  counter.count = 0;
+
+  return counter;
+}
+
+let counter = makeCounter();
+alert( counter() ); // 0
+alert( counter() ); // 1
+现在 count 被直接存储在函数里，而不是它外部的词法环境。

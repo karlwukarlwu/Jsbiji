@@ -1,0 +1,14 @@
+function makeCounter() {
+  let count = 0;
+
+  return function() {
+    return count++;
+  };
+}
+
+let counter = makeCounter();
+
+运行多次counter 会得到 0 1 2 3 4 5 6 7 8 9
+environment 会记录count运行的词法环境
+
+https://zh.javascript.info/closure

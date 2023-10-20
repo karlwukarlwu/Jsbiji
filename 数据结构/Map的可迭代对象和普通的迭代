@@ -1,0 +1,30 @@
+let t = new Map([
+    ['1',  'str1'],
+    [1,    'num1'],
+    [true, 'bool1']
+])
+
+let c = t.keys()
+console.log(c)//[Map Iterator] { '1', 1, true }
+
+Map 迭代返回的是迭代器 不是数组
+
+Map 迭代
+如果要在 map 里使用循环，可以使用以下三个方法：
+
+map.keys() —— 遍历并返回一个包含所有键的可迭代对象，
+map.values() —— 遍历并返回一个包含所有值的可迭代对象，
+map.entries() —— 遍历并返回一个包含所有实体 [key, value] 的可迭代对象，for..of 在默认情况下使用的就是这个。
+
+Object.keys，values，entries
+对于普通对象，下列这些方法是可用的：
+
+Object.keys(obj) —— 返回一个包含该对象所有的键的数组。
+Object.values(obj) —— 返回一个包含该对象所有的值的数组。
+Object.entries(obj) —— 返回一个包含该对象所有 [key, value] 键值对的数组。
+
+……但是请注意区别（比如说跟 map 的区别）：
+	    Map	        Object
+调用语法	map.keys()	Object.keys(obj)，而不是 obj.keys()
+返回值	可迭代对象	“真正的”数组
+

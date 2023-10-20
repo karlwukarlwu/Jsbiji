@@ -1,0 +1,19 @@
+这里还有一个特别的，检查属性是否存在的操作符 "in"。
+
+语法是：
+
+"key" in object
+例如：
+
+let user = { name: "John", age: 30 };
+
+alert( "age" in user ); // true，user.age 存在
+alert( "blabla" in user ); // false，user.blabla 不存在。
+请注意，in 的左边必须是 属性名。通常是一个带引号的字符串。
+
+如果我们省略引号，就意味着左边是一个变量，它应该包含要判断的实际属性名。例如：
+
+let user = { age: 30 };
+
+let key = "age";// 当用in的时候判断的 是key这个变量的值 age
+alert( key in user ); // true，属性 "age" 存在

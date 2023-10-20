@@ -1,0 +1,19 @@
+let x = 1;
+
+function func() {
+  console.log(x); // ReferenceError: Cannot access 'x' before initialization
+  let x = 2;
+}
+
+func();
+答案：error。
+局部死域（Temporal Dead Zone，简称 TDZ）：在块级作用域内，使用 let 命令声明变量之前，该变量都是不可用的，称为“暂时性死区”。
+function func() {
+  // 引擎从函数开始就知道局部变量 x，
+  // 但是变量 x 一直处于“未初始化”（无法使用）的状态，直到遇到 let，此时“死区”结束
+  // 因此答案是 error
+
+  console.log(x); // ReferenceError: Cannot access 'x' before initialization
+
+  let x = 2;
+}

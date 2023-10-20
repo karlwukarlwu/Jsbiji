@@ -1,0 +1,48 @@
+在 JavaScript 中，有两种声名变量的方式：使用 `var` 关键字和直接声明变量（没有使用 `var`、`let` 或 `const`）之间存在一些重要区别：
+
+1. **作用域区别**：
+   - 使用 `var` 声明的变量具有函数作用域（function-scoped）。这意味着它们只在声明它们的函数内部可见。
+   - 直接声明的变量没有块级作用域（block-scoped），它们是全局作用域的一部分，如果在函数内部声明，则也可以在函数外部访问。
+
+   示例：
+   ```javascript
+   function example() {
+       if (true) {
+           var varVariable = "I'm a var";
+           let letVariable = "I'm a let";
+           noKeywordVariable = "I'm not declared with a keyword";
+       }
+       console.log(varVariable); // 可以访问 varVariable
+       console.log(letVariable); // 不能访问 letVariable，因为它在块内
+       console.log(noKeywordVariable); // 可以访问 noKeywordVariable
+   }
+   example();
+   console.log(varVariable); // 可以访问 varVariable
+   console.log(letVariable); // 不能访问 letVariable
+   console.log(noKeywordVariable); // 可以访问 noKeywordVariable
+   ```
+
+2. **变量提升**：
+   - 使用 `var` 声明的变量会发生变量提升（hoisting），即它们在执行上下文中被提升到顶部，可以在声明之前访问，但值为 `undefined`。
+   - 直接声明的变量不会发生变量提升，试图在声明之前访问它们会导致 `ReferenceError`。
+
+   示例：
+   ```javascript
+   console.log(varVariable); // undefined，而不是 ReferenceError
+   console.log(noKeywordVariable); // ReferenceError，因为没有声明
+
+   var varVariable = "I'm a var";
+   noKeywordVariable = "I'm not declared with a keyword";
+   ```
+
+3. **全局对象属性**：
+   - 直接声明的变量会成为全局对象的属性（在浏览器中通常是 `window` 对象的属性）。
+   - 使用 `var` 声明的变量不会成为全局对象的属性，它们只在声明它们的作用域中可见。
+
+   示例：
+   ```javascript
+   console.log(window.noKeywordVariable); // 访问全局对象属性
+   console.log(window.varVariable); // undefined，因为不是全局对象的属性
+   ```
+
+总之，推荐使用 `let` 或 `const` 来声明变量，因为它们具有块级作用域，不会发生变量提升，并且不会污染全局作用域。在现代 JavaScript 中，`var` 的使用已经不太推荐，除非有特殊需求。

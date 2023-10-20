@@ -1,0 +1,41 @@
+instanceof 操作符
+
+本质上就是找 instanceof 右侧的 prototype 属性是否在左侧对象的原型链上。
+语法：
+
+obj instanceof Class
+如果 obj 隶属于 Class 类（或 Class 类的衍生类），则返回 true。
+
+例如：
+
+class Rabbit {}
+let rabbit = new Rabbit();
+
+// rabbit 是 Rabbit class 的对象吗？
+alert( rabbit instanceof Rabbit ); // true
+它还可以与构造函数一起使用：
+
+// 这里是构造函数，而不是 class
+function Rabbit() {}
+
+
+改了原型链instance of失效
+创建对象后，如果更改 prototype 属性，可能会导致有趣的结果。
+
+就像这样：
+
+function Rabbit() {}
+let rabbit = new Rabbit();
+
+// 修改了 prototype
+Rabbit.prototype = {};
+
+// ...再也不是 rabbit 了！
+alert( rabbit instanceof Rabbit ); // false
+
+alert( new Rabbit() instanceof Rabbit ); // true
+……与诸如 Array 之类的内建 class 一起使用：
+
+let arr = [1, 2, 3];
+alert( arr instanceof Array ); // true
+alert( arr instanceof Object ); // true

@@ -1,0 +1,47 @@
+toString/valueOf
+   我这里测了半天全是valueOf 起作用
+如果没有 Symbol.toPrimitive，那么 JavaScript 将尝试寻找 toString 和 valueOf 方法：
+
+对于 "string" hint：调用 toString 方法，如果它不存在，则调用 valueOf 方法（因此，对于字符串转换，优先调用 toString）。
+对于其他 hint：调用 valueOf 方法，如果它不存在，则调用 toString 方法（因此，对于数学运算，优先调用 valueOf 方法）。
+toString 和 valueOf 方法很早己有了。它们不是 symbol（那时候还没有 symbol 这个概念），而是“常规的”字符串命名的方法。它们提供了一种可选的“老派”的实现转换的方法。
+
+这些方法必须返回一个原始值。如果 toString 或 valueOf 返回了一个对象，那么返回值会被忽略（和这里没有方法的时候相同）。
+
+默认情况下，普通对象具有 toString 和 valueOf 方法：
+
+toString 方法返回一个字符串 "[object Object]"。
+valueOf 方法返回对象自身。
+下面是一个示例：
+
+let user = {name: "John"};
+
+alert(user); // [object Object]
+alert(user.valueOf() === user); // true
+所以，如果我们尝试将一个对象当做字符串来使用，例如在 alert 中，那么在默认情况下我们会看到 [object Object]。
+
+这里提到的默认的 valueOf 只是为了完整起见，以避免混淆。正如你看到的，它返回对象本身，因此被忽略。别问我为什么，这是历史原因。所以我们可以假设它根本就不存在。
+
+让我们实现一下这些方法来自定义转换。
+
+例如，这里的 user 执行和前面提到的那个 user 一样的操作，使用 toString 和 valueOf 的组合（而不是 Symbol.toPrimitive）：
+
+let user = {
+  name: "John",
+  money: 1000,
+
+  // 对于 hint="string"
+  toString() {
+    return `{name: "${this.name}"}`;
+  },
+
+  // 对于 hint="number" 或 "default"
+  valueOf() {
+    return this.money;
+  }
+
+};
+
+alert(user); // toString -> {name: "John"}
+alert(+user); // valueOf -> 1000
+alert(user + 500); // valueOf -> 1500

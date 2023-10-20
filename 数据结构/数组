@@ -1,0 +1,9 @@
+声明
+创建一个空数组有两种语法：
+
+let arr = new Array();
+let arr = [];
+绝大多数情况下使用的都是第二种语法。我们可以在方括号中添加初始元素：
+
+let fruits = ["Apple", "Orange", "Plum"];
+

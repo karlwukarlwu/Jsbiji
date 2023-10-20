@@ -1,0 +1,5 @@
+在浏览器中，使用 var（而不是 let/const！）声明的全局函数和变量会成为全局对象的属性。
+
+var gVar = 5;
+
+alert(window.gVar); // 5（成为了全局对象的属性）

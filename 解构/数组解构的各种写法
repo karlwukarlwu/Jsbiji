@@ -1,0 +1,42 @@
+数组解构
+这是一个将数组解构到变量中的例子：
+
+// 我们有一个存放了名字和姓氏的数组
+let arr = ["John", "Smith"]
+
+// 解构赋值
+let t = [1,2,3,4]
+
+//只要前两个
+let [c,d] =t
+console.log(c,d)// 1 2
+
+//一个要第一个 一个要剩下的
+let [a,...b] = t;
+console.log(a,b)// 1 [ 2, 3, 4 ]
+
+//跳过前两个
+let [,,...e] = t;
+console.log(e)// [ 3, 4 ]
+
+进一步的赋值
+赋值给等号左侧的任何内容
+我们可以在等号左侧使用任何“可以被赋值的”东西。
+
+例如，一个对象的属性：
+
+let user = {};
+[user.name, user.surname] = "John Smith".split(' ');
+
+alert(user.name); // John
+alert(user.surname); // Smith
+
+解构和默认值搭配
+如果我们想要一个“默认”值给未赋值的变量，我们可以使用 = 来提供：
+
+// 默认值
+let [name = "Guest", surname = "Anonymous"] = ["Julius"];
+
+alert(name);    // Julius（来自数组的值）
+alert(surname); // Anonymous（默认值被使用了）
+

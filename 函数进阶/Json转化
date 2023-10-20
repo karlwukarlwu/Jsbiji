@@ -1,0 +1,53 @@
+JavaScript 提供了如下方法：
+
+JSON.stringify 将对象转换为 JSON。
+JSON.parse 将 JSON 转换回对象。
+例如，在这里我们 JSON.stringify 一个 student 对象：
+
+let student = {
+  name: 'John',
+  age: 30,
+  isAdmin: false,
+  courses: ['html', 'css', 'js'],
+  spouse: null
+};
+
+let json = JSON.stringify(student);
+
+alert(typeof json); // we've got a string!
+
+alert(json);
+/* JSON 编码的对象：
+{
+  "name": "John",
+  "age": 30,
+  "isAdmin": false,
+  "courses": ["html", "css", "js"],
+  "spouse": null
+}
+*/
+
+一些特定于 JavaScript 的对象属性会被 JSON.stringify 跳过。
+
+即：
+
+    函数属性（方法）。
+    Symbol 类型的键和值。
+    存储 undefined 的属性。
+
+let user = {
+  sayHi() { // 被忽略
+    alert("Hello");
+  },
+  [Symbol("id")]: 123, // 被忽略
+  something: undefined // 被忽略
+};
+
+alert( JSON.stringify(user) ); // {}（空对象）
+
+JSON.stringify 的完整语法是：
+
+let json = JSON.stringify(value[, replacer, space])
+序列化特定的属性
+https://zh.javascript.info/json
+需要再看

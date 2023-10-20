@@ -1,0 +1,8 @@
+这种简写一定是上文声名过
+const age = 18;
+const name = 'why';
+let person = {
+    age,
+    name,
+};
+//这样写一定要保证上文中有声名过age和name

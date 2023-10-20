@@ -1,0 +1,18 @@
+let sayHi = function func(who) {
+  if (who) {
+    alert(`Hello, ${who}`);
+  } else {
+    func("Guest"); // 使用 func 再次调用函数自身
+  }
+};
+
+sayHi(); // Hello, Guest
+
+// 但这不工作：
+func(); // Error, func is not defined（在函数外不可见）
+
+
+关于名字 func 有两个特殊的地方，这就是添加它的原因：
+
+1、它允许函数在内部引用自己。
+2、它在函数外是不可见的。

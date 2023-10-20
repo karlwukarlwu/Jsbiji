@@ -1,0 +1,58 @@
+https://zh.javascript.info/constructor-new
+
+
+构造函数是一种特殊的函数，主要用于创建和初始化一个对象。在面向对象的编程中，构造函数是一种特殊的方法，它在创建对象的实例时被调用。
+
+在JavaScript中，构造函数通常与`new`关键字一起使用来创建新的对象。
+
+以下是构造函数的一些主要特点：
+
+1. **名称习惯**：构造函数的名称通常以大写字母开头（这是一个约定，不是强制的，但它帮助开发者区分构造函数和普通函数）。
+
+2. **使用`new`关键字**：为了创建一个新的实例，构造函数通常与`new`关键字一起使用。
+
+3. **初始化属性**：构造函数通常用于初始化新对象的属性。
+
+4. **隐式返回**：如果构造函数没有显式地返回任何值，则它会隐式地返回新创建的对象。但是，如果构造函数显式地返回一个对象，则`new`关键字会返回该对象。
+
+下面是一个简单的构造函数示例：
+
+```javascript
+function Car(make, model) {
+    this.make = make;
+    this.model = model;
+    this.drive = function() {
+        console.log(this.make + " " + this.model + " is driving!");
+    };
+}
+
+// 使用构造函数创建新的对象
+const myCar = new Car('Toyota', 'Corolla');
+myCar.drive();  // 输出: Toyota Corolla is driving!
+```
+
+在上述示例中：
+
+- `Car`是一个构造函数，它接受两个参数：`make`和`model`。
+- 使用`new`关键字和`Car`构造函数，我们创建了一个名为`myCar`的新对象。
+- 这个新对象有`make`、`model`属性和一个`drive`方法。
+
+此外，随着ES6和类的引入，JavaScript还提供了一个更现代、更面向对象的方式来定义构造函数，即使用`class`关键字和特殊的`constructor`方法：
+
+```javascript
+class Car {
+    constructor(make, model) {
+        this.make = make;
+        this.model = model;
+    }
+
+    drive() {
+        console.log(this.make + " " + this.model + " is driving!");
+    }
+}
+
+const myCar = new Car('Honda', 'Civic');
+myCar.drive();  // 输出: Honda Civic is driving!
+```
+
+在这个示例中，`class`定义和前面的构造函数示例基本上是等价的，但提供了更明确、更结构化的语法。

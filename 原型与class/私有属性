@@ -1,0 +1,29 @@
+受保护的属性通常以下划线 _ 作为前缀。
+https://zh.javascript.info/private-protected-properties-methods
+
+只读的 “power”
+对于 power 属性，让我们将它设为只读。有时候一个属性必须只能被在创建时进行设置，之后不再被修改。
+
+咖啡机就是这种情况：功率永远不会改变。
+
+要做到这一点，我们只需要设置 getter，而不设置 setter：
+
+class CoffeeMachine {
+  // ...
+
+  constructor(power) {
+    this._power = power;
+  }
+
+  get power() {
+    return this._power;
+  }
+
+}
+
+// 创建咖啡机
+let coffeeMachine = new CoffeeMachine(100);
+
+alert(`Power is: ${coffeeMachine.power}W`); // 功率是：100W
+
+coffeeMachine.power = 25; // Error（没有 setter）

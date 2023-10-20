@@ -1,0 +1,20 @@
+IIFE
+在之前，JavaScript 中只有 var 这一种声明变量的方式，并且这种方式声明的变量没有块级作用域，程序员们就发明了一种模仿块级作用域的方法。这种方法被称为“立即调用函数表达式”（immediately-invoked function expressions，IIFE）。
+
+如今，我们不应该再使用 IIFE 了，但是你可以在旧脚本中找到它们。
+
+IIFE 看起来像这样：
+
+(function() {
+
+  var message = "Hello";
+
+  alert(message); // Hello
+
+})();
+
+Js不让这么写函数
+// 下面的括号会导致语法错误
+function go() {
+
+}(); // <-- 不能立即调用函数声明

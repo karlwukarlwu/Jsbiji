@@ -1,0 +1,16 @@
+symbol 在 for…in 中会被跳过
+symbol 属性不参与 for..in 循环。
+
+例如：
+
+let id = Symbol("id");
+let user = {
+  name: "John",
+  age: 30,
+  [id]: 123
+};
+
+for (let key in user) alert(key); // name, age（没有 symbol）
+
+// 使用 symbol 任务直接访问
+alert("Direct: " + user[id]); // Direct: 123

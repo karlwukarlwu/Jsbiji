@@ -1,0 +1,47 @@
+
+try...catch 结构可能还有一个代码子句（clause）：finally。
+
+如果它存在，它在所有情况下都会被执行：
+
+try 之后，如果没有 error，
+catch 之后，如果有 error。
+该扩展语法如下所示：
+
+try {
+   ... 尝试执行的代码 ...
+} catch (err) {
+   ... 处理 error ...
+} finally {
+   ... 总是会执行的代码 ...
+}
+
+throw 和 instance of 加强对error的处理
+throw new Error("Whoops!"); 这样可以扔出一个error
+
+err instanceof SyntaxError 用来判断err是否是SyntaxError的实例
+这样搭配if else 就可以对不同的error进行不同的处理
+
+我们使用“再次抛出”，以达到在 catch 中只处理 SyntaxError 的目的：
+
+let json = '{ "age": 30 }'; // 不完整的数据
+try {
+
+  let user = JSON.parse(json);
+
+  if (!user.name) {
+    throw new SyntaxError("数据不全：没有 name");
+  }
+
+  blabla(); // 预料之外的 error
+
+  alert( user.name );
+
+} catch (err) {
+
+  if (err instanceof SyntaxError) {
+    alert( "JSON Error: " + err.message );
+  } else {
+    throw err; // 再次抛出 (*)
+  }
+
+}

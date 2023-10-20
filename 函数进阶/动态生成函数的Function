@@ -1,0 +1,34 @@
+下面这个例子可以帮助你理解创建语法。这是一个带有两个参数的函数：
+
+let sum = new Function('a', 'b', 'return a + b');
+
+alert( sum(1, 2) ); // 3
+这里有一个没有参数的函数，只有函数体：
+
+let sayHi = new Function('alert("Hello")');
+
+sayHi(); // Hello
+
+以前的所有声明方法都需要我们 —— 程序员，在脚本中编写函数的代码。
+
+但是 new Function 允许我们将任意字符串变为函数。例如，我们可以从服务器接收一个新的函数并执行它：
+
+let str = ... 动态地接收来自服务器的代码 ...
+
+let func = new Function(str);
+func();
+使用 new Function 创建函数的应用场景非常特殊，比如在复杂的 Web 应用程序中，我们需要从服务器获取代码或者动态地从模板编译函数时才会使用。
+
+但是如果我们使用 new Function 创建一个函数，那么该函数的 [[Environment]] 并不指向当前的词法环境，而是指向全局环境。
+
+因此，此类函数无法访问外部（outer）变量，只能访问全局变量。
+
+function getFunc() {
+  let value = "test";
+
+  let func = new Function('alert(value)');
+
+  return func;
+}
+
+getFunc()(); // error: value is not defined

@@ -1,0 +1,15 @@
+我们可以使用 || 运算符：
+
+那里短路返回那里的值，到哪里判断生效 返回哪里的值
+
+function showMessage(text) {
+  // 如果 text 为 undefined 或者为假值，那么将其赋值为 'empty'
+  text = text || 'empty';
+  ...
+}
+
+let c = 10;
+let d = 20;
+// let t = c||d;
+let t = c&&d;
+console.log(t)// 20

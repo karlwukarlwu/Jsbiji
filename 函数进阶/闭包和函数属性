@@ -1,0 +1,25 @@
+闭包
+
+function f1(){
+    let t = 10;
+    return function (){
+        t++;
+        return t;
+    }
+}
+let f = f1();
+console.log(f());
+
+函数属性
+function f2(){
+    f2.a = 10;
+    return function (){
+        f2.a++;
+        return f2.a;
+    }
+}
+
+一个外部可以访问 函数属性
+一个外部无法访问 闭包
+
+
